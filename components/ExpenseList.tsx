@@ -19,24 +19,24 @@ function LoadingState() {
       {[0, 1, 2].map((index) => (
         <div
           key={index}
-          className="h-24 animate-pulse rounded-2xl border border-stone-200 bg-white"
+          className="h-20 animate-pulse rounded-xl border border-white/10 bg-white/5"
         />
       ))}
-      <p className="text-sm text-stone-500">טוען את ההוצאות שלך...</p>
+      <p className="text-sm text-white/50">טוען את ההוצאות שלך...</p>
     </div>
   );
 }
 
 function EmptyState() {
   return (
-    <div className="rounded-2xl border border-dashed border-stone-300 bg-stone-50 px-6 py-10 text-center">
-      <p className="text-base font-medium text-stone-900">אין הוצאות עדיין</p>
-      <p className="mt-2 text-sm text-stone-500">
+    <div className="rounded-2xl border border-dashed border-white/20 bg-white/5 px-6 py-10 text-center">
+      <p className="text-base font-medium text-white">אין הוצאות עדיין</p>
+      <p className="mt-2 text-sm text-white/60">
         הוסיפו את ההוצאה הראשונה למעלה כדי להתחיל לעקוב.
       </p>
       <a
         href="#add-expense"
-        className="mt-6 inline-flex min-h-11 min-w-11 items-center justify-center rounded-xl bg-stone-900 px-6 text-sm font-medium text-white transition hover:bg-stone-800"
+        className="mt-6 inline-flex min-h-11 min-w-11 items-center justify-center rounded-xl bg-purple-500 hover:bg-purple-400 text-white font-medium px-6 text-sm transition-all duration-200"
       >
         הוסף הוצאה
       </a>
@@ -54,14 +54,14 @@ function ErrorState({
   return (
     <div
       role="alert"
-      className="rounded-2xl border border-red-200 bg-red-50 px-6 py-5"
+      className="rounded-2xl border border-red-500/30 bg-red-500/20 px-6 py-5"
     >
-      <p className="font-medium text-red-800">לא ניתן לטעון את ההוצאות</p>
-      <p className="mt-2 text-sm text-red-700">{message}</p>
+      <p className="font-medium text-red-200">לא ניתן לטעון את ההוצאות</p>
+      <p className="mt-2 text-sm text-red-300/80">{message}</p>
       <button
         type="button"
         onClick={onRetry}
-        className="mt-4 inline-flex min-h-11 min-w-11 items-center justify-center rounded-xl border border-red-300 bg-white px-4 text-sm font-medium text-red-700 transition hover:bg-red-100"
+        className="mt-4 inline-flex min-h-11 min-w-11 items-center justify-center rounded-xl border border-white/20 bg-white/10 px-4 text-sm font-medium text-white transition hover:bg-white/20"
       >
         נסה שוב
       </button>
@@ -75,16 +75,16 @@ export function ExpenseList({ status, expenses = [], error }: ExpenseListProps) 
   return (
     <section
       aria-labelledby="expense-list-heading"
-      className="rounded-2xl border border-stone-200 bg-white p-6 shadow-sm"
+      className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 shadow-xl shadow-black/20"
     >
       <div className="mb-6">
         <h2
           id="expense-list-heading"
-          className="text-lg font-semibold text-stone-900"
+          className="text-lg font-semibold text-white/90"
         >
           כל ההוצאות
         </h2>
-        <p className="mt-1 text-sm text-stone-500">מהחדש לישן</p>
+        <p className="mt-1 text-sm text-white/50">מהחדש לישן</p>
       </div>
 
       {status === "loading" ? <LoadingState /> : null}
@@ -99,7 +99,7 @@ export function ExpenseList({ status, expenses = [], error }: ExpenseListProps) 
       ) : null}
 
       {status === "success" ? (
-        <ul className="space-y-3">
+        <ul className="divide-y divide-white/10 border-t border-white/10 -mx-6 -mb-6 mt-4 max-h-[400px] overflow-y-auto">
           {expenses.map((expense) => (
             <ExpenseItem key={expense.id} expense={expense} />
           ))}

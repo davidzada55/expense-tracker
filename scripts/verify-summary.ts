@@ -68,8 +68,8 @@ async function verifyValidation(): Promise<void> {
 async function verifyMissingKeyHandling(): Promise<void> {
   console.log("Verifying missing API key handling...");
 
-  const originalKey = process.env.ANTHROPIC_API_KEY;
-  delete process.env.ANTHROPIC_API_KEY;
+  const originalKey = process.env.GEMINI_API_KEY;
+  delete process.env.GEMINI_API_KEY;
 
   const response = await POST(
     new Request("http://localhost/api/summary", {
@@ -92,7 +92,7 @@ async function verifyMissingKeyHandling(): Promise<void> {
   );
 
   if (originalKey) {
-    process.env.ANTHROPIC_API_KEY = originalKey;
+    process.env.GEMINI_API_KEY = originalKey;
   }
 
   if (response.status !== 500) {
@@ -173,9 +173,9 @@ async function main(): Promise<void> {
   await verifyValidation();
   await verifyMissingKeyHandling();
 
-  if (!process.env.ANTHROPIC_API_KEY) {
+  if (!process.env.GEMINI_API_KEY) {
     console.log(
-      "Skipping live summary check: ANTHROPIC_API_KEY is not set.",
+      "Skipping live summary check: GEMINI_API_KEY is not set.",
     );
     return;
   }

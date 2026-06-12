@@ -40,7 +40,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="he" dir="rtl">
-      <body className={`${heebo.className} bg-stone-50 text-stone-900 antialiased`}>
+      <body className={`${heebo.className} bg-gradient-to-br from-slate-900 via-purple-950 to-slate-900 min-h-screen text-white antialiased bg-fixed`}>
         {children}
       </body>
     </html>

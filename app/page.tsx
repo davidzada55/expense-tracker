@@ -4,7 +4,9 @@ import { getExpenses } from "@/app/actions/expenses";
 import { ExpenseForm } from "@/components/ExpenseForm";
 import { ExpenseList } from "@/components/ExpenseList";
 import { MonthlySummary } from "@/components/MonthlySummary";
-import { filterExpensesForCurrentMonth } from "@/lib/expenses";
+import { BudgetAlert } from "@/components/BudgetAlert";
+import { filterExpensesForCurrentMonth, getMonthlyTotal } from "@/lib/expenses";
+import { getCurrentMonthLabel } from "@/lib/format";
 
 export const dynamic = "force-dynamic";
 
@@ -41,13 +43,19 @@ async function ExpenseSections() {
   const expenses = result.success ? result.data : [];
   const errorMessage = result.success ? undefined : result.error;
 
+  const monthExpenses = filterExpensesForCurrentMonth(expenses);
+  const monthlyTotal = getMonthlyTotal(monthExpenses);
+  const showBudgetTracking = result.success && monthExpenses.length > 0;
+
   return (
     <>
+      {showBudgetTracking ? <BudgetAlert monthlyTotal={monthlyTotal} /> : null}
       <MonthlySummary
         status={getSummaryStatus(result)}
         expenses={expenses}
         error={errorMessage}
       />
+      <ExpenseForm />
       <ExpenseList
         status={getListStatus(result)}
         expenses={expenses}
@@ -61,6 +69,7 @@ function ExpenseSectionsFallback() {
   return (
     <>
       <MonthlySummary status="loading" />
+      <ExpenseForm />
       <ExpenseList status="loading" />
     </>
   );
@@ -68,28 +77,24 @@ function ExpenseSectionsFallback() {
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-stone-50">
-      <div className="mx-auto max-w-3xl px-4 py-10">
-        <header className="mb-8">
-          <p className="text-sm font-medium uppercase tracking-wide text-stone-500">
-            כספים אישיים
-          </p>
-          <h1 className="mt-2 text-3xl font-semibold tracking-tight text-stone-900">
+    <main className="min-h-screen w-full px-4 py-8 md:px-8 max-w-4xl mx-auto flex flex-col gap-8">
+      <header className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-white/10 pb-6">
+        <div>
+          <h1 className="text-3xl font-bold text-white tracking-tight">
             מעקב הוצאות
           </h1>
-          <p className="mt-2 max-w-2xl text-sm text-stone-600">
+          <p className="mt-1 text-sm text-white/50">
             עקבו אחר ההוצאות לפי קטגוריה וקבלו תמונת מצב חודשית במבט אחד.
           </p>
-        </header>
-
-        <div className="space-y-8">
-          <ExpenseForm />
-
-          <Suspense fallback={<ExpenseSectionsFallback />}>
-            <ExpenseSections />
-          </Suspense>
         </div>
-      </div>
+        <div className="text-xl font-bold text-purple-400">
+          {getCurrentMonthLabel()}
+        </div>
+      </header>
+
+      <Suspense fallback={<ExpenseSectionsFallback />}>
+        <ExpenseSections />
+      </Suspense>
     </main>
   );
 }

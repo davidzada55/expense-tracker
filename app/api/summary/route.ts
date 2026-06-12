@@ -1,4 +1,4 @@
-import Anthropic from "@anthropic-ai/sdk";
+import { GoogleGenAI } from "@google/genai";
 import { NextResponse } from "next/server";
 
 import { buildSummaryPrompt } from "@/lib/summary-prompt";
@@ -23,32 +23,25 @@ export async function POST(request: Request) {
     );
   }
 
-  const apiKey = process.env.ANTHROPIC_API_KEY;
+  const apiKey = process.env.GEMINI_API_KEY;
 
   if (!apiKey) {
     return NextResponse.json(
-      { error: "מפתח Anthropic API לא מוגדר בשרת." },
+      { error: "מפתח Gemini API לא מוגדר בשרת." },
       { status: 500 },
     );
   }
 
   try {
-    const anthropic = new Anthropic({ apiKey });
+    const ai = new GoogleGenAI({ apiKey });
     const prompt = buildSummaryPrompt(parsed.data);
 
-    const message = await anthropic.messages.create({
-      model: "claude-sonnet-4-6",
-      max_tokens: 300,
-      messages: [
-        {
-          role: "user",
-          content: prompt,
-        },
-      ],
+    const response = await ai.models.generateContent({
+      model: "gemini-3.5-flash",
+      contents: prompt,
     });
 
-    const textBlock = message.content.find((block) => block.type === "text");
-    const summary = textBlock?.type === "text" ? textBlock.text.trim() : "";
+    const summary = response.text?.trim() ?? "";
 
     if (!summary) {
       return NextResponse.json(

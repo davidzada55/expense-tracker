@@ -5,10 +5,20 @@ import { useRouter } from "next/navigation";
 
 import { deleteExpense } from "@/app/actions/expenses";
 import { formatCategory, formatCurrency, formatDate } from "@/lib/format";
-import type { Expense } from "@/lib/types";
+import type { Expense, ExpenseCategory } from "@/lib/types";
 
 type ExpenseItemProps = {
   expense: Expense;
+};
+
+const categoryColors: Record<ExpenseCategory, string> = {
+  food: "bg-emerald-500/20 text-emerald-300 text-xs font-medium px-2.5 py-1 rounded-full",
+  transport: "bg-blue-500/20 text-blue-300 text-xs font-medium px-2.5 py-1 rounded-full",
+  housing: "bg-amber-500/20 text-amber-300 text-xs font-medium px-2.5 py-1 rounded-full",
+  health: "bg-rose-500/20 text-rose-300 text-xs font-medium px-2.5 py-1 rounded-full",
+  entertainment: "bg-violet-500/20 text-violet-300 text-xs font-medium px-2.5 py-1 rounded-full",
+  investments: "bg-cyan-500/20 text-cyan-300 text-xs font-medium px-2.5 py-1 rounded-full",
+  other: "bg-slate-500/20 text-slate-300 text-xs font-medium px-2.5 py-1 rounded-full",
 };
 
 export function ExpenseItem({ expense }: ExpenseItemProps) {
@@ -32,23 +42,28 @@ export function ExpenseItem({ expense }: ExpenseItemProps) {
   }
 
   return (
-    <li className="rounded-2xl border border-stone-200 bg-white p-4 shadow-sm">
-      <div className="flex items-start justify-between gap-4">
-        <div className="min-w-0 flex-1">
-          <div className="flex flex-wrap items-center gap-2">
-            <p className="text-lg font-semibold text-stone-900">
-              {formatCurrency(expense.amount)}
-            </p>
-            <span className="rounded-full bg-stone-100 px-3 py-1 text-xs font-medium text-stone-700">
-              {formatCategory(expense.category)}
-            </span>
-          </div>
-          <p className="mt-1 text-sm text-stone-500">
+    <li className="flex items-center justify-between gap-4 border-b border-white/10 last:border-0 px-6 py-4 hover:bg-white/5 transition-colors duration-150 min-h-[56px] last:rounded-b-2xl">
+      {/* Right side: Category Badge + Note */}
+      <div className="flex items-center gap-3 min-w-0">
+        <span className={`shrink-0 ${categoryColors[expense.category]}`}>
+          {formatCategory(expense.category)}
+        </span>
+        {expense.note ? (
+          <p className="text-sm text-white/70 truncate max-w-[180px] sm:max-w-md" title={expense.note}>
+            {expense.note}
+          </p>
+        ) : null}
+      </div>
+
+      {/* Left side: Amount + Date + Delete Button */}
+      <div className="flex items-center gap-4 shrink-0">
+        <div className="text-left">
+          <p className="text-base font-semibold text-white">
+            {formatCurrency(expense.amount)}
+          </p>
+          <p className="text-xs text-white/50 mt-0.5">
             {formatDate(expense.date)}
           </p>
-          {expense.note ? (
-            <p className="mt-2 text-sm text-stone-700">{expense.note}</p>
-          ) : null}
         </div>
 
         <button
@@ -56,14 +71,33 @@ export function ExpenseItem({ expense }: ExpenseItemProps) {
           onClick={handleDelete}
           disabled={isPending}
           aria-label={`מחק הוצאה בקטגוריה ${formatCategory(expense.category)}`}
-          className="inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center rounded-xl border border-stone-300 px-4 text-sm font-medium text-stone-700 transition hover:border-stone-400 hover:bg-stone-50 disabled:cursor-not-allowed disabled:opacity-60"
+          className="text-white/40 hover:text-red-400 transition-colors duration-200 p-2 rounded-lg hover:bg-white/10"
         >
-          {isPending ? "..." : "מחק"}
+          {isPending ? (
+            <svg className="animate-spin h-5 w-5" fill="none" viewBox="0 0 24 24">
+              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+            </svg>
+          ) : (
+            <svg
+              className="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth="2"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+              />
+            </svg>
+          )}
         </button>
       </div>
 
       {error ? (
-        <p role="alert" className="mt-3 text-sm text-red-600">
+        <p role="alert" className="absolute bottom-1 left-6 text-xs text-red-400">
           {error}
         </p>
       ) : null}
