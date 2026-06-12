@@ -22,23 +22,23 @@ type MonthlySummaryProps = {
 };
 
 const categoryDots: Record<ExpenseCategory, string> = {
-  food: "bg-emerald-400",
-  transport: "bg-blue-400",
-  housing: "bg-amber-400",
-  health: "bg-rose-400",
-  entertainment: "bg-violet-400",
-  investments: "bg-cyan-400",
-  other: "bg-slate-400",
+  food: "bg-[#acc07d]",          // Sage / Light Olive
+  transport: "bg-[#dfb15b]",     // Rich Gold
+  housing: "bg-[#cdaa57]",       // Standard Gold
+  health: "bg-[#e8daab]",        // Bright metallic Gold
+  entertainment: "bg-[#b8903c]", // Deep gold / Bronze
+  investments: "bg-[#5e684f]",   // Olive Green
+  other: "bg-white/40",          // Muted slate white
 };
 
 const categoryColors: Record<ExpenseCategory, string> = {
-  food: "#34d399",          // bg-emerald-400
-  transport: "#60a5fa",     // bg-blue-400
-  housing: "#fbbf24",       // bg-amber-400
-  health: "#fb7185",        // bg-rose-400
-  entertainment: "#c084fc", // bg-violet-400
-  investments: "#22d3ee",   // bg-cyan-400
-  other: "#94a3b8",         // bg-slate-400
+  food: "#acc07d",
+  transport: "#dfb15b",
+  housing: "#cdaa57",
+  health: "#e8daab",
+  entertainment: "#b8903c",
+  investments: "#5e684f",
+  other: "#a3ad98",
 };
 
 function LoadingState() {
@@ -113,7 +113,7 @@ function renderFormattedSummary(text: string) {
     const formattedLine = parts.map((part, partIndex) => {
       if (partIndex % 2 === 1) {
         return (
-          <strong key={partIndex} className="font-bold text-white">
+          <strong key={partIndex} className="font-bold text-gold-300">
             {part}
           </strong>
         );
@@ -124,7 +124,7 @@ function renderFormattedSummary(text: string) {
     if (isBullet) {
       return (
         <div key={index} className="mr-4 flex items-start gap-1.5 py-1">
-          <span className="text-emerald-400 font-bold select-none">•</span>
+          <span className="text-gold-400 font-bold select-none">•</span>
           <div className="flex-1">{formattedLine}</div>
         </div>
       );
@@ -232,23 +232,23 @@ export function MonthlySummary({
   return (
     <section
       aria-labelledby="monthly-summary-heading"
-      className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 shadow-xl shadow-black/20"
+      className="bg-[#12160e]/80 backdrop-blur-md border border-olive-700/50 rounded-2xl p-6 shadow-2xl shadow-black/40 border-t-gold-400/30"
     >
-      <div className="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-4">
+      <div className="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-olive-700/40 pb-4">
         <div>
           <h2
             id="monthly-summary-heading"
-            className="text-lg font-semibold text-white/90"
+            className="text-lg font-bold text-white"
           >
             סיכום חודשי
           </h2>
-          <p className="mt-1 text-sm text-white/50">{getCurrentMonthLabel()}</p>
+          <p className="mt-1 text-sm text-white/70">{getCurrentMonthLabel()}</p>
         </div>
 
         {hasMonthlyData ? (
           <div className="text-right sm:text-left">
             <p className="text-xs text-white/60">סה״כ הוצאות חודשי</p>
-            <p className="text-3xl font-bold text-white mt-1">
+            <p className="text-3xl font-extrabold text-gold-300 mt-1">
               {formatCurrency(monthlyTotal)}
             </p>
           </div>
@@ -300,7 +300,7 @@ export function MonthlySummary({
                         r={radius}
                         fill="transparent"
                         stroke={categoryColors[slice.category]}
-                        strokeWidth={isHovered ? "16" : "12"}
+                        strokeWidth={isHovered ? "15" : "11"}
                         strokeDasharray={`${slice.strokeLength} ${circumference - slice.strokeLength}`}
                         strokeDashoffset={slice.strokeOffset}
                         strokeLinecap="round"
@@ -323,17 +323,17 @@ export function MonthlySummary({
                       <span className="text-xs text-white/50 font-medium">
                         {formatCategory(hoveredCategory)}
                       </span>
-                      <span className="text-lg font-bold text-white mt-0.5">
+                      <span className="text-lg font-bold text-gold-300 mt-0.5">
                         {formatCurrency(categoryTotals[hoveredCategory])}
                       </span>
-                      <span className="text-xs text-emerald-400 font-semibold mt-0.5">
+                      <span className="text-xs text-gold-400 font-semibold mt-0.5">
                         {((categoryTotals[hoveredCategory] / monthlyTotal) * 100).toFixed(1)}%
                       </span>
                     </>
                   ) : (
                     <>
                       <span className="text-xs text-white/50 font-medium">סה״כ החודש</span>
-                      <span className="text-xl font-extrabold text-white mt-0.5">
+                      <span className="text-xl font-extrabold text-gold-300 mt-0.5">
                         {formatCurrency(monthlyTotal)}
                       </span>
                       <span className="text-[10px] text-white/40 mt-0.5">
@@ -357,8 +357,8 @@ export function MonthlySummary({
                       key={category}
                       className={`relative flex flex-col justify-between overflow-hidden rounded-xl border p-4 transition-all duration-300 ${
                         isHovered
-                          ? "border-white/30 bg-white/10 scale-[1.01] shadow-lg shadow-black/10"
-                          : "border-white/10 bg-white/5"
+                          ? "border-white/40 bg-white/10 scale-[1.01] shadow-lg shadow-black/20"
+                          : "border-white/10 bg-[#161a11]/90"
                       }`}
                       onMouseEnter={() => setHoveredCategory(category)}
                       onMouseLeave={() => setHoveredCategory(null)}
@@ -396,7 +396,7 @@ export function MonthlySummary({
             </div>
           </div>
 
-          <div className="mt-6 border-t border-white/10 pt-6">
+          <div className="mt-6 border-t border-olive-700/40 pt-6">
             <div className="flex flex-wrap items-center justify-between gap-3">
               <div>
                 <h3 className="text-sm font-semibold text-white/90">
@@ -411,7 +411,7 @@ export function MonthlySummary({
                 type="button"
                 onClick={handleGenerateSummary}
                 disabled={isGenerating}
-                className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white px-4 py-2 text-sm font-medium transition duration-200 disabled:cursor-not-allowed disabled:opacity-50"
+                className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-xl bg-gradient-to-r from-gold-600 to-gold-500 hover:from-gold-500 hover:to-gold-400 text-olive-950 font-bold px-4 py-2 text-sm transition duration-200 disabled:cursor-not-allowed disabled:opacity-50 shadow-md shadow-gold-500/5"
               >
                 {isGenerating ? "מנתח הוצאות..." : "צור סיכום AI"}
               </button>
@@ -447,7 +447,7 @@ export function MonthlySummary({
             {aiSummary ? (
               <div
                 role="status"
-                className="mt-4 bg-white/5 border border-white/10 rounded-xl p-4 text-white/80 text-sm leading-relaxed"
+                className="mt-4 bg-[#161a11]/90 border border-olive-700/40 rounded-xl p-4 text-white/95 text-sm leading-relaxed"
               >
                 {renderFormattedSummary(aiSummary)}
               </div>

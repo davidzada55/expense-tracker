@@ -87,7 +87,7 @@ export default function Home() {
             עקבו אחר ההוצאות לפי קטגוריה וקבלו תמונת מצב חודשית במבט אחד.
           </p>
         </div>
-        <div className="text-xl font-bold text-purple-400">
+        <div className="text-xl font-bold text-gold-300 border-b border-gold-300/20 pb-0.5">
           {getCurrentMonthLabel()}
         </div>
       </header>

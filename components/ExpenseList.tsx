@@ -19,7 +19,7 @@ function LoadingState() {
       {[0, 1, 2].map((index) => (
         <div
           key={index}
-          className="h-20 animate-pulse rounded-xl border border-white/10 bg-white/5"
+          className="h-20 animate-pulse rounded-xl border border-olive-700/40 bg-white/5"
         />
       ))}
       <p className="text-sm text-white/50">טוען את ההוצאות שלך...</p>
@@ -29,14 +29,14 @@ function LoadingState() {
 
 function EmptyState() {
   return (
-    <div className="rounded-2xl border border-dashed border-white/20 bg-white/5 px-6 py-10 text-center">
+    <div className="rounded-2xl border border-dashed border-olive-700/40 bg-white/5 px-6 py-10 text-center">
       <p className="text-base font-medium text-white">אין הוצאות עדיין</p>
       <p className="mt-2 text-sm text-white/60">
         הוסיפו את ההוצאה הראשונה למעלה כדי להתחיל לעקוב.
       </p>
       <a
         href="#add-expense"
-        className="mt-6 inline-flex min-h-11 min-w-11 items-center justify-center rounded-xl bg-purple-500 hover:bg-purple-400 text-white font-medium px-6 text-sm transition-all duration-200"
+        className="mt-6 inline-flex min-h-11 min-w-11 items-center justify-center rounded-xl bg-gradient-to-r from-gold-500 to-gold-400 hover:from-gold-400 hover:to-gold-300 text-olive-950 font-bold px-6 text-sm transition-all duration-200 shadow-md shadow-gold-500/10"
       >
         הוסף הוצאה
       </a>
@@ -75,16 +75,16 @@ export function ExpenseList({ status, expenses = [], error }: ExpenseListProps) 
   return (
     <section
       aria-labelledby="expense-list-heading"
-      className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 shadow-xl shadow-black/20"
+      className="bg-[#12160e]/80 backdrop-blur-md border border-olive-700/50 rounded-2xl p-6 shadow-2xl shadow-black/40 border-t-gold-400/30"
     >
       <div className="mb-6">
         <h2
           id="expense-list-heading"
-          className="text-lg font-semibold text-white/90"
+          className="text-lg font-bold text-white"
         >
           כל ההוצאות
         </h2>
-        <p className="mt-1 text-sm text-white/50">מהחדש לישן</p>
+        <p className="mt-1 text-sm text-white/70">מהחדש לישן</p>
       </div>
 
       {status === "loading" ? <LoadingState /> : null}
@@ -99,7 +99,7 @@ export function ExpenseList({ status, expenses = [], error }: ExpenseListProps) 
       ) : null}
 
       {status === "success" ? (
-        <ul className="divide-y divide-white/10 border-t border-white/10 -mx-6 -mb-6 mt-4 max-h-[400px] overflow-y-auto">
+        <ul className="divide-y divide-white/5 border-t border-olive-700/40 -mx-6 -mb-6 mt-4 max-h-[400px] overflow-y-auto">
           {expenses.map((expense) => (
             <ExpenseItem key={expense.id} expense={expense} />
           ))}

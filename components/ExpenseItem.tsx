@@ -12,13 +12,13 @@ type ExpenseItemProps = {
 };
 
 const categoryColors: Record<ExpenseCategory, string> = {
-  food: "bg-emerald-500/20 text-emerald-300 text-xs font-medium px-2.5 py-1 rounded-full",
-  transport: "bg-blue-500/20 text-blue-300 text-xs font-medium px-2.5 py-1 rounded-full",
-  housing: "bg-amber-500/20 text-amber-300 text-xs font-medium px-2.5 py-1 rounded-full",
-  health: "bg-rose-500/20 text-rose-300 text-xs font-medium px-2.5 py-1 rounded-full",
-  entertainment: "bg-violet-500/20 text-violet-300 text-xs font-medium px-2.5 py-1 rounded-full",
-  investments: "bg-cyan-500/20 text-cyan-300 text-xs font-medium px-2.5 py-1 rounded-full",
-  other: "bg-slate-500/20 text-slate-300 text-xs font-medium px-2.5 py-1 rounded-full",
+  food: "bg-[#acc07d]/15 text-[#acc07d] border border-[#acc07d]/20 text-xs font-medium px-2.5 py-1 rounded-full",
+  transport: "bg-[#dfb15b]/15 text-[#dfb15b] border border-[#dfb15b]/20 text-xs font-medium px-2.5 py-1 rounded-full",
+  housing: "bg-[#cdaa57]/15 text-[#cdaa57] border border-[#cdaa57]/20 text-xs font-medium px-2.5 py-1 rounded-full",
+  health: "bg-[#e8daab]/15 text-[#e8daab] border border-[#e8daab]/20 text-xs font-medium px-2.5 py-1 rounded-full",
+  entertainment: "bg-[#b8903c]/15 text-[#b8903c] border border-[#b8903c]/20 text-xs font-medium px-2.5 py-1 rounded-full",
+  investments: "bg-[#5e684f]/15 text-[#acc07d] border border-[#5e684f]/30 text-xs font-medium px-2.5 py-1 rounded-full",
+  other: "bg-white/5 text-white/70 border border-white/10 text-xs font-medium px-2.5 py-1 rounded-full",
 };
 
 export function ExpenseItem({ expense }: ExpenseItemProps) {
@@ -42,14 +42,14 @@ export function ExpenseItem({ expense }: ExpenseItemProps) {
   }
 
   return (
-    <li className="flex items-center justify-between gap-4 border-b border-white/10 last:border-0 px-6 py-4 hover:bg-white/5 transition-colors duration-150 min-h-[56px] last:rounded-b-2xl">
+    <li className="flex items-center justify-between gap-4 border-b border-white/5 last:border-0 px-6 py-4 hover:bg-white/5 transition-colors duration-150 min-h-[56px] last:rounded-b-2xl">
       {/* Right side: Category Badge + Note */}
       <div className="flex items-center gap-3 min-w-0">
         <span className={`shrink-0 ${categoryColors[expense.category]}`}>
           {formatCategory(expense.category)}
         </span>
         {expense.note ? (
-          <p className="text-sm text-white/70 truncate max-w-[180px] sm:max-w-md" title={expense.note}>
+          <p className="text-sm text-white/90 truncate max-w-[180px] sm:max-w-md" title={expense.note}>
             {expense.note}
           </p>
         ) : null}
@@ -58,10 +58,10 @@ export function ExpenseItem({ expense }: ExpenseItemProps) {
       {/* Left side: Amount + Date + Delete Button */}
       <div className="flex items-center gap-4 shrink-0">
         <div className="text-left">
-          <p className="text-base font-semibold text-white">
+          <p className="text-base font-bold text-white">
             {formatCurrency(expense.amount)}
           </p>
-          <p className="text-xs text-white/50 mt-0.5">
+          <p className="text-xs text-white/60 mt-0.5">
             {formatDate(expense.date)}
           </p>
         </div>
