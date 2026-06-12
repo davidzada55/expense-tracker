@@ -28,7 +28,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#1c1917",
+  themeColor: "#061912",
   width: "device-width",
   initialScale: 1,
   maximumScale: 1,
@@ -42,7 +42,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="he" dir="rtl">
-      <body className={`${heebo.className} bg-gradient-to-br from-[#0c0e0a] via-[#151911] to-[#0c0e0a] min-h-screen text-white/95 antialiased bg-fixed`}>
+      <body className={`${heebo.className} bg-gradient-to-br from-olive-950 via-olive-900 to-olive-950 min-h-screen text-white/95 antialiased bg-fixed`}>
         <DevServiceWorkerCleanup />
         {children}
       </body>

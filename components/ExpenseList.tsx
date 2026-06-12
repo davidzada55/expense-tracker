@@ -19,7 +19,7 @@ function LoadingState() {
       {[0, 1, 2].map((index) => (
         <div
           key={index}
-          className="h-20 animate-pulse rounded-xl border border-olive-700/40 bg-white/5"
+          className="h-20 animate-pulse rounded-xl border border-olive-500/30 bg-white/5"
         />
       ))}
       <p className="text-sm text-white/50">טוען את ההוצאות שלך...</p>
@@ -29,14 +29,14 @@ function LoadingState() {
 
 function EmptyState() {
   return (
-    <div className="rounded-2xl border border-dashed border-olive-700/40 bg-white/5 px-6 py-10 text-center">
+    <div className="rounded-2xl border border-dashed border-olive-500/35 bg-white/5 px-6 py-10 text-center">
       <p className="text-base font-medium text-white">אין הוצאות עדיין</p>
       <p className="mt-2 text-sm text-white/60">
         הוסיפו את ההוצאה הראשונה למעלה כדי להתחיל לעקוב.
       </p>
       <a
         href="#add-expense"
-        className="mt-6 inline-flex min-h-11 min-w-11 items-center justify-center rounded-xl bg-gradient-to-r from-gold-500 to-gold-400 hover:from-gold-400 hover:to-gold-300 text-olive-950 font-bold px-6 text-sm transition-all duration-200 shadow-md shadow-gold-500/10"
+        className="mt-6 inline-flex min-h-11 min-w-11 items-center justify-center rounded-xl bg-gradient-to-r from-olive-500 to-olive-400 hover:from-olive-400 hover:to-olive-300 text-olive-950 font-bold px-6 text-sm transition-all duration-200 shadow-md shadow-olive-500/20"
       >
         הוסף הוצאה
       </a>
@@ -75,7 +75,7 @@ export function ExpenseList({ status, expenses = [], error }: ExpenseListProps) 
   return (
     <section
       aria-labelledby="expense-list-heading"
-      className="bg-[#12160e]/80 backdrop-blur-md border border-olive-700/50 rounded-2xl p-6 shadow-2xl shadow-black/40 border-t-gold-400/30"
+      className="bg-olive-900/85 backdrop-blur-md border border-olive-500/35 rounded-2xl p-6 shadow-2xl shadow-black/40 border-t-olive-400/40"
     >
       <div className="mb-6">
         <h2
@@ -99,7 +99,7 @@ export function ExpenseList({ status, expenses = [], error }: ExpenseListProps) 
       ) : null}
 
       {status === "success" ? (
-        <ul className="divide-y divide-white/5 border-t border-olive-700/40 -mx-6 -mb-6 mt-4 max-h-[400px] overflow-y-auto">
+        <ul className="divide-y divide-olive-500/10 border-t border-olive-500/25 -mx-6 -mb-6 mt-4 max-h-[400px] overflow-y-auto">
           {expenses.map((expense) => (
             <ExpenseItem key={expense.id} expense={expense} />
           ))}

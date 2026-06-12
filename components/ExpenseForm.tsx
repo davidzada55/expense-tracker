@@ -21,7 +21,7 @@ function SubmitButton() {
     <button
       type="submit"
       disabled={pending}
-      className="w-full min-h-11 inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-gold-500 via-gold-400 to-gold-500 hover:from-gold-400 hover:via-gold-300 hover:to-gold-400 text-olive-950 font-bold px-6 py-3 transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-50 border border-gold-300/30 shadow-lg shadow-gold-500/10 hover:shadow-gold-500/20"
+      className="w-full min-h-11 inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-olive-500 via-olive-400 to-olive-500 hover:from-olive-400 hover:via-olive-300 hover:to-olive-400 text-olive-950 font-bold px-6 py-3 transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-50 border border-olive-300/40 shadow-lg shadow-olive-500/20 hover:shadow-olive-400/30"
     >
       {pending ? "מוסיף..." : "הוסף הוצאה"}
     </button>
@@ -44,7 +44,7 @@ export function ExpenseForm() {
     <section
       id="add-expense"
       aria-labelledby="add-expense-heading"
-      className="bg-[#12160e]/80 backdrop-blur-md border border-olive-700/50 rounded-2xl p-6 shadow-2xl shadow-black/40 border-t-gold-400/30"
+      className="bg-olive-900/85 backdrop-blur-md border border-olive-500/35 rounded-2xl p-6 shadow-2xl shadow-black/40 border-t-olive-400/40"
     >
       <div className="mb-6">
         <h2
@@ -52,7 +52,7 @@ export function ExpenseForm() {
           className="text-lg font-bold text-white flex items-center gap-2"
         >
           <svg
-            className="h-5 w-5 text-gold-300"
+            className="h-5 w-5 text-olive-300"
             fill="none"
             viewBox="0 0 24 24"
             strokeWidth="2.5"
@@ -79,7 +79,7 @@ export function ExpenseForm() {
               min="0.01"
               required
               placeholder="0.00"
-              className="min-h-11 w-full rounded-xl border border-white/20 bg-black/30 px-4 text-white placeholder-white/50 outline-none transition focus:border-gold-300 focus:ring-1 focus:ring-gold-300/50"
+              className="min-h-11 w-full rounded-xl border border-olive-500/25 bg-black/30 px-4 text-white placeholder-white/50 outline-none transition focus:border-olive-400 focus:ring-1 focus:ring-olive-400/40"
             />
           </label>
 
@@ -89,7 +89,7 @@ export function ExpenseForm() {
               name="category"
               required
               defaultValue="food"
-              className="min-h-11 w-full rounded-xl border border-white/20 bg-black/30 px-4 text-white outline-none transition focus:border-gold-300 focus:ring-1 focus:ring-gold-300/50"
+              className="min-h-11 w-full rounded-xl border border-olive-500/25 bg-black/30 px-4 text-white outline-none transition focus:border-olive-400 focus:ring-1 focus:ring-olive-400/40"
             >
               {expenseCategories.map((category) => (
                 <option key={category} value={category} className="bg-olive-950 text-white">
@@ -106,7 +106,7 @@ export function ExpenseForm() {
               type="date"
               required
               defaultValue={today}
-              className="min-h-11 w-full rounded-xl border border-white/20 bg-black/30 px-4 text-white placeholder-white/50 outline-none transition focus:border-gold-300 focus:ring-1 focus:ring-gold-300/50"
+              className="min-h-11 w-full rounded-xl border border-olive-500/25 bg-black/30 px-4 text-white placeholder-white/50 outline-none transition focus:border-olive-400 focus:ring-1 focus:ring-olive-400/40"
             />
           </label>
 
@@ -119,7 +119,7 @@ export function ExpenseForm() {
               rows={3}
               maxLength={500}
               placeholder="על מה הייתה ההוצאה?"
-              className="w-full rounded-xl border border-white/20 bg-black/30 px-4 py-3 text-white placeholder-white/50 outline-none transition focus:border-gold-300 focus:ring-1 focus:ring-gold-300/50"
+              className="w-full rounded-xl border border-olive-500/25 bg-black/30 px-4 py-3 text-white placeholder-white/50 outline-none transition focus:border-olive-400 focus:ring-1 focus:ring-olive-400/40"
             />
           </label>
         </div>

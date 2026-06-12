@@ -10,17 +10,17 @@ const config: Config = {
     extend: {
       colors: {
         olive: {
-          50: '#f6f7f4',
-          100: '#eaece5',
-          200: '#c5cbbe',
-          300: '#a3ad98',
-          400: '#7b876d',
-          500: '#5e684f', // mid olive
-          600: '#49503d', // deep olive
-          700: '#383e30', // very deep olive
-          800: '#23271d', // rich black olive
-          900: '#11140c', // Darker base for containers (higher contrast)
-          950: '#060804', // Near-black base (for background)
+          50: '#ecfdf5',
+          100: '#d1fae5',
+          200: '#a7f3d0',
+          300: '#6ee7b7', // bright accent text
+          400: '#34d399', // main bright green
+          500: '#10b981', // primary buttons
+          600: '#059669',
+          700: '#047857',
+          800: '#065f46',
+          900: '#0c2e22', // card background
+          950: '#061912', // page background
         },
         gold: {
           50: '#fbf9f0',

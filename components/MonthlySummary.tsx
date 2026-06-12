@@ -22,22 +22,22 @@ type MonthlySummaryProps = {
 };
 
 const categoryDots: Record<ExpenseCategory, string> = {
-  food: "bg-[#acc07d]",          // Sage / Light Olive
-  transport: "bg-[#dfb15b]",     // Rich Gold
-  housing: "bg-[#cdaa57]",       // Standard Gold
-  health: "bg-[#e8daab]",        // Bright metallic Gold
-  entertainment: "bg-[#b8903c]", // Deep gold / Bronze
-  investments: "bg-[#5e684f]",   // Olive Green
-  other: "bg-white/40",          // Muted slate white
+  food: "bg-olive-400",
+  transport: "bg-olive-300",
+  housing: "bg-emerald-500",
+  health: "bg-teal-400",
+  entertainment: "bg-lime-400",
+  investments: "bg-green-600",
+  other: "bg-white/40",
 };
 
 const categoryColors: Record<ExpenseCategory, string> = {
-  food: "#acc07d",
-  transport: "#dfb15b",
-  housing: "#cdaa57",
-  health: "#e8daab",
-  entertainment: "#b8903c",
-  investments: "#5e684f",
+  food: "#34d399",
+  transport: "#6ee7b7",
+  housing: "#10b981",
+  health: "#2dd4bf",
+  entertainment: "#a3e635",
+  investments: "#059669",
   other: "#a3ad98",
 };
 
@@ -113,7 +113,7 @@ function renderFormattedSummary(text: string) {
     const formattedLine = parts.map((part, partIndex) => {
       if (partIndex % 2 === 1) {
         return (
-          <strong key={partIndex} className="font-bold text-gold-300">
+          <strong key={partIndex} className="font-bold text-olive-300">
             {part}
           </strong>
         );
@@ -124,7 +124,7 @@ function renderFormattedSummary(text: string) {
     if (isBullet) {
       return (
         <div key={index} className="mr-4 flex items-start gap-1.5 py-1">
-          <span className="text-gold-400 font-bold select-none">•</span>
+          <span className="text-olive-400 font-bold select-none">•</span>
           <div className="flex-1">{formattedLine}</div>
         </div>
       );
@@ -232,9 +232,9 @@ export function MonthlySummary({
   return (
     <section
       aria-labelledby="monthly-summary-heading"
-      className="bg-[#12160e]/80 backdrop-blur-md border border-olive-700/50 rounded-2xl p-6 shadow-2xl shadow-black/40 border-t-gold-400/30"
+      className="bg-olive-900/85 backdrop-blur-md border border-olive-500/35 rounded-2xl p-6 shadow-2xl shadow-black/40 border-t-olive-400/40"
     >
-      <div className="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-olive-700/40 pb-4">
+      <div className="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-olive-500/25 pb-4">
         <div>
           <h2
             id="monthly-summary-heading"
@@ -248,7 +248,7 @@ export function MonthlySummary({
         {hasMonthlyData ? (
           <div className="text-right sm:text-left">
             <p className="text-xs text-white/60">סה״כ הוצאות חודשי</p>
-            <p className="text-3xl font-extrabold text-gold-300 mt-1">
+            <p className="text-3xl font-extrabold text-olive-300 mt-1">
               {formatCurrency(monthlyTotal)}
             </p>
           </div>
@@ -323,17 +323,17 @@ export function MonthlySummary({
                       <span className="text-xs text-white/50 font-medium">
                         {formatCategory(hoveredCategory)}
                       </span>
-                      <span className="text-lg font-bold text-gold-300 mt-0.5">
+                      <span className="text-lg font-bold text-olive-300 mt-0.5">
                         {formatCurrency(categoryTotals[hoveredCategory])}
                       </span>
-                      <span className="text-xs text-gold-400 font-semibold mt-0.5">
+                      <span className="text-xs text-olive-400 font-semibold mt-0.5">
                         {((categoryTotals[hoveredCategory] / monthlyTotal) * 100).toFixed(1)}%
                       </span>
                     </>
                   ) : (
                     <>
                       <span className="text-xs text-white/50 font-medium">סה״כ החודש</span>
-                      <span className="text-xl font-extrabold text-gold-300 mt-0.5">
+                      <span className="text-xl font-extrabold text-olive-300 mt-0.5">
                         {formatCurrency(monthlyTotal)}
                       </span>
                       <span className="text-[10px] text-white/40 mt-0.5">
@@ -358,7 +358,7 @@ export function MonthlySummary({
                       className={`relative flex flex-col justify-between overflow-hidden rounded-xl border p-4 transition-all duration-300 ${
                         isHovered
                           ? "border-white/40 bg-white/10 scale-[1.01] shadow-lg shadow-black/20"
-                          : "border-white/10 bg-[#161a11]/90"
+                          : "border-olive-500/20 bg-olive-800/90"
                       }`}
                       onMouseEnter={() => setHoveredCategory(category)}
                       onMouseLeave={() => setHoveredCategory(null)}
@@ -396,7 +396,7 @@ export function MonthlySummary({
             </div>
           </div>
 
-          <div className="mt-6 border-t border-olive-700/40 pt-6">
+          <div className="mt-6 border-t border-olive-500/25 pt-6">
             <div className="flex flex-wrap items-center justify-between gap-3">
               <div>
                 <h3 className="text-sm font-semibold text-white/90">
@@ -411,7 +411,7 @@ export function MonthlySummary({
                 type="button"
                 onClick={handleGenerateSummary}
                 disabled={isGenerating}
-                className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-xl bg-gradient-to-r from-gold-600 to-gold-500 hover:from-gold-500 hover:to-gold-400 text-olive-950 font-bold px-4 py-2 text-sm transition duration-200 disabled:cursor-not-allowed disabled:opacity-50 shadow-md shadow-gold-500/5"
+                className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-xl bg-gradient-to-r from-olive-600 to-olive-500 hover:from-olive-500 hover:to-olive-400 text-olive-950 font-bold px-4 py-2 text-sm transition duration-200 disabled:cursor-not-allowed disabled:opacity-50 shadow-md shadow-olive-500/20"
               >
                 {isGenerating ? "מנתח הוצאות..." : "צור סיכום AI"}
               </button>
@@ -447,7 +447,7 @@ export function MonthlySummary({
             {aiSummary ? (
               <div
                 role="status"
-                className="mt-4 bg-[#161a11]/90 border border-olive-700/40 rounded-xl p-4 text-white/95 text-sm leading-relaxed"
+                className="mt-4 bg-olive-800/90 border border-olive-500/25 rounded-xl p-4 text-white/95 text-sm leading-relaxed"
               >
                 {renderFormattedSummary(aiSummary)}
               </div>

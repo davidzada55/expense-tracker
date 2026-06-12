@@ -78,17 +78,25 @@ function ExpenseSectionsFallback() {
 export default function Home() {
   return (
     <main className="min-h-screen w-full px-4 py-8 md:px-8 max-w-4xl mx-auto flex flex-col gap-8">
-      <header className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-white/10 pb-6">
+      <header className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-olive-500/20 pb-6">
         <div>
           <h1 className="text-3xl font-bold text-white tracking-tight">
             מעקב הוצאות
           </h1>
-          <p className="mt-1 text-sm text-white/50">
+          <p className="mt-1 text-sm text-white/60">
             עקבו אחר ההוצאות לפי קטגוריה וקבלו תמונת מצב חודשית במבט אחד.
           </p>
         </div>
-        <div className="text-xl font-bold text-gold-300 border-b border-gold-300/20 pb-0.5">
-          {getCurrentMonthLabel()}
+        <div className="flex flex-col items-start gap-2 sm:items-end">
+          <div className="text-xl font-bold text-olive-300 border-b border-olive-400/30 pb-0.5">
+            {getCurrentMonthLabel()}
+          </div>
+          <a
+            href="/stocks"
+            className="text-sm text-white/70 transition-colors hover:text-white"
+          >
+            תיק מניות 📈
+          </a>
         </div>
       </header>
 
