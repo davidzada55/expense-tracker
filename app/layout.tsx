@@ -1,12 +1,36 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Heebo } from "next/font/google";
 import "./globals.css";
 
 const heebo = Heebo({ subsets: ["hebrew", "latin"] });
 
+const APP_NAME = "מעקב הוצאות";
+const APP_DESCRIPTION = "עקבו אחר ההוצאות שלכם עם סיכומים חודשיים והתראות תקציב";
+
 export const metadata: Metadata = {
-  title: "מעקב הוצאות",
-  description: "עקבו אחר ההוצאות שלכם עם סיכומים חודשיים",
+  applicationName: APP_NAME,
+  title: {
+    default: APP_NAME,
+    template: `%s | ${APP_NAME}`,
+  },
+  description: APP_DESCRIPTION,
+  manifest: "/manifest.webmanifest",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: APP_NAME,
+  },
+  formatDetection: {
+    telephone: false,
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#1c1917",
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
 };
 
 export default function RootLayout({
