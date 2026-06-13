@@ -1,7 +1,10 @@
 import type { Metadata, Viewport } from "next";
 import { Heebo } from "next/font/google";
 
+import { AppNav } from "@/components/AppNav";
 import { DevServiceWorkerCleanup } from "@/components/DevServiceWorkerCleanup";
+import { DifficultyTheme } from "@/components/DifficultyTheme";
+import { OnboardingGuard } from "@/components/OnboardingGuard";
 import "./globals.css";
 
 const heebo = Heebo({ subsets: ["hebrew", "latin"] });
@@ -44,7 +47,11 @@ export default function RootLayout({
     <html lang="he" dir="rtl">
       <body className={`${heebo.className} bg-gradient-to-br from-olive-950 via-olive-900 to-olive-950 min-h-screen text-white/95 antialiased bg-fixed`}>
         <DevServiceWorkerCleanup />
-        {children}
+        <DifficultyTheme />
+        <OnboardingGuard>
+          <AppNav />
+          {children}
+        </OnboardingGuard>
       </body>
     </html>
   );

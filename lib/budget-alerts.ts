@@ -1,14 +1,28 @@
+import { getDifficultyConfig } from "@/lib/difficulty";
+
 export const MONTHLY_BUDGET_WARNING_THRESHOLD = 8_000;
 export const MONTHLY_BUDGET_LIMIT = 10_000;
 
 export type BudgetAlertLevel = "none" | "warning" | "critical";
 
+function getAdjustedThresholds() {
+  const config = getDifficultyConfig();
+
+  return {
+    warning:
+      MONTHLY_BUDGET_WARNING_THRESHOLD * config.budgetWarningMultiplier,
+    limit: MONTHLY_BUDGET_LIMIT * config.budgetCriticalMultiplier,
+  };
+}
+
 export function getBudgetAlertLevel(monthlyTotal: number): BudgetAlertLevel {
-  if (monthlyTotal >= MONTHLY_BUDGET_LIMIT) {
+  const { warning, limit } = getAdjustedThresholds();
+
+  if (monthlyTotal >= limit) {
     return "critical";
   }
 
-  if (monthlyTotal >= MONTHLY_BUDGET_WARNING_THRESHOLD) {
+  if (monthlyTotal >= warning) {
     return "warning";
   }
 
@@ -16,9 +30,19 @@ export function getBudgetAlertLevel(monthlyTotal: number): BudgetAlertLevel {
 }
 
 export function getRemainingBudget(monthlyTotal: number): number {
-  return Math.max(0, MONTHLY_BUDGET_LIMIT - monthlyTotal);
+  const { limit } = getAdjustedThresholds();
+  return Math.max(0, limit - monthlyTotal);
 }
 
 export function getBudgetOverage(monthlyTotal: number): number {
-  return Math.max(0, monthlyTotal - MONTHLY_BUDGET_LIMIT);
+  const { limit } = getAdjustedThresholds();
+  return Math.max(0, monthlyTotal - limit);
+}
+
+export function getAdjustedBudgetLimit(): number {
+  return getAdjustedThresholds().limit;
+}
+
+export function getAdjustedWarningThreshold(): number {
+  return getAdjustedThresholds().warning;
 }
